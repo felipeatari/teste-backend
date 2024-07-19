@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class SearchCepController extends Controller
 {
@@ -50,7 +51,7 @@ class SearchCepController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, [
-            CURLOPT_URL => 'viacep.com.br/ws/' . $cep . '/json/',
+            CURLOPT_URL => 'https://viacep.com.br/ws/' . $cep . '/json/',
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
@@ -62,4 +63,9 @@ class SearchCepController extends Controller
 
         return json_decode($response, true);
     }
+
+    // private function apiViaCeps(string $cep): array
+    // {
+    //     return Http::get('https://viacep.com.br/ws/' . $cep . '/json')->json();
+    // }
 }
