@@ -16,13 +16,13 @@ class SearchCepController extends Controller
      */
     public function search(Request $request): JsonResponse
     {
-        $ceps = $request->ceps;
+        $reqCeps = $request->ceps;
 
-        $cepsColection = explode(',', $ceps);
+        $ceps = explode(',', $reqCeps);
 
         $response = [];
 
-        foreach ($cepsColection as $cep):
+        foreach ($ceps as $cep):
             // Válida o CEP antes do envio
             if (! preg_match('/^\d{5}-\d{3}$/', $cep) and ! preg_match('/^\d{8}$/', $cep)) {
                 $response[] = [
